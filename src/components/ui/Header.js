@@ -2,6 +2,7 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import PropTypes from 'prop-types';
+import Typography from '@material-ui/core/Typography';
 
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
 
@@ -34,7 +35,9 @@ export default function Header(props) {
     <ElevationScroll>
       <AppBar position="fixed">
         <Toolbar>
-          Arc Development
+          <Typography variant="h3">
+            Arc Development
+          </Typography>
         </Toolbar>
       </AppBar>
     </ElevationScroll>
