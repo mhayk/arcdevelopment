@@ -100,6 +100,12 @@ export default function Header(props) {
     setOpen(false);
   };
 
+  const handleMenuItemClick = (e, i) => {
+    setAnchorEl(null);
+    setOpen(false);
+    setSelectedIndex(i);
+  };
+
   const menuOptions = [
     { name: 'Services', link: '/services' },
     { name: 'Custom Software Development', link: '/customsoftware' },
@@ -192,9 +198,15 @@ export default function Header(props) {
               elevation={0}
             >
               {
-                menuOptions.map((item) => (
+                menuOptions.map((item, i) => (
                   <MenuItem
-                    onClick={() => { handleClose(); setValue(1); }}
+                    key={item}
+                    onClick={(event) => {
+                      handleMenuItemClick(event, i);
+                      setValue(i);
+                      handleClose();
+                    }}
+                    selected={i === selectedIndex && value === 1}
                     component={Link}
                     to={item.link}
                     classes={{ root: classes.menuItem }}
