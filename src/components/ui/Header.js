@@ -86,6 +86,11 @@ const useStyles = makeStyles((theme) => ({
       opacity: 1,
     },
   },
+  drawerIconContainer: {
+    '&:hover': {
+      backgroundColor: 'transparent',
+    },
+  },
 }));
 
 ElevationScroll.propTypes = {
@@ -271,7 +276,7 @@ export default function Header(props) {
       >
         Example Drawer
       </SwipeableDrawer>
-      <IconButton onClick={() => setOpenDrawer(!openDrawer)} disableRipple>
+      <IconButton className={classes.drawerIconContainer} onClick={() => setOpenDrawer(!openDrawer)} disableRipple>
         <MenuIcon />
       </IconButton>
     </>
