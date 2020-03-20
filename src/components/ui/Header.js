@@ -92,6 +92,10 @@ const useStyles = makeStyles((theme) => ({
       backgroundColor: 'transparent',
     },
   },
+  drawerIcon: {
+    height: '50px',
+    width: '50px',
+  },
 }));
 
 ElevationScroll.propTypes = {
@@ -277,8 +281,12 @@ export default function Header(props) {
       >
         Example Drawer
       </SwipeableDrawer>
-      <IconButton className={classes.drawerIconContainer} onClick={() => setOpenDrawer(!openDrawer)} disableRipple>
-        <MenuIcon />
+      <IconButton
+        className={classes.drawerIconContainer}
+        onClick={() => setOpenDrawer(!openDrawer)}
+        disableRipple
+      >
+        <MenuIcon className={classes.drawerIcon} />
       </IconButton>
     </>
   );
