@@ -183,9 +183,16 @@ export default function Header(props) {
 
   const routes = [
     { name: 'Home', link: '/', activeIndex: 0 },
-    { name: 'Services', link: '/services', activeIndex: 1 },
+    {
+      name: 'Services',
+      link: '/services',
+      activeIndex: 1,
+      ariaOwns: anchorEl ? 'simple-menu' : undefined,
+      ariaPopup: anchorEl ? 'true' : undefined,
+      mouseOver: (event) => handleClick(event),
+    },
     { name: 'The Revolution', link: '/revolution', activeIndex: 2 },
-    { name: 'About US', link: '/abount', activeIndex: 3 },
+    { name: 'About US', link: '/about', activeIndex: 3 },
     { name: 'Contact', link: '/contact', activeIndex: 4 },
   ];
 
@@ -214,39 +221,19 @@ export default function Header(props) {
         className={classes.tabContainer}
         indicatorColor="primary"
       >
-        <Tab
-          className={classes.tab}
-          component={Link}
-          to="/"
-          label="Home"
-        />
-        <Tab
-          aria-owns={anchorEl ? 'simple-menu' : undefined}
-          aria-haspopup={anchorEl ? 'true' : undefined}
-          className={classes.tab}
-          component={Link}
-          onMouseOver={(event) => handleClick(event)}
-          to="/services"
-          label="Services"
-        />
-        <Tab
-          className={classes.tab}
-          component={Link}
-          to="/revolution"
-          label="The Revolution"
-        />
-        <Tab
-          className={classes.tab}
-          component={Link}
-          to="/about"
-          label="About Us"
-        />
-        <Tab
-          className={classes.tab}
-          component={Link}
-          to="/contact"
-          label="Contact Us"
-        />
+        {
+          routes.map((route, index) => (
+            <Tab
+              className={classes.tab}
+              component={Link}
+              to={route.link}
+              label={route.name}
+              aria-owns={route.arialOwns}
+              aria-haspopup={route.ariaPopup}
+              onMouseOver={route.mouseOver}
+            />
+          ))
+        }
       </Tabs>
       <Button
         variant="contained"
