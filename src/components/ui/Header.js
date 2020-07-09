@@ -155,56 +155,56 @@ export default function Header(props) {
   };
 
   const menuOptions = [
-    { name: 'Services', link: '/services' },
-    { name: 'Custom Software Development', link: '/customsoftware' },
-    { name: 'Mobile App Development', link: '/mobileapps' },
-    { name: 'Website Development', link: '/websites' },
+    {
+      name: 'Services',
+      link: '/services',
+      activeIndex: 1,
+      selectedIndex: 0,
+    },
+    {
+      name: 'Custom Software Development',
+      link: '/customsoftware',
+      activeIndex: 1,
+      selectedIndex: 1,
+    },
+    {
+      name: 'Mobile App Development',
+      link: '/mobileapps',
+      activeIndex: 1,
+      selectedIndex: 2,
+    },
+    {
+      name: 'Website Development',
+      link: '/websites',
+      activeIndex: 1,
+      selectedIndex: 3,
+    },
+  ];
+
+  const routes = [
+    { name: 'Home', link: '/', activeIndex: 0 },
+    { name: 'Services', link: '/services', activeIndex: 1 },
+    { name: 'The Revolution', link: '/revolution', activeIndex: 2 },
+    { name: 'About US', link: '/abount', activeIndex: 3 },
+    { name: 'Contact', link: '/contact', activeIndex: 4 },
   ];
 
   useEffect(() => {
-    switch (window.location.pathname) {
-      case '/':
-        if (value !== 0) setValue(0);
-        break;
-      case '/service':
-        if (value !== 1) {
-          setValue(1);
-          setSelectedIndex(0);
-        }
-        break;
-      case '/customsoftware':
-        if (value !== 1) {
-          setValue(1);
-          setSelectedIndex(1);
-        }
-        break;
-      case '/mobileapps':
-        if (value !== 1) {
-          setValue(1);
-          setSelectedIndex(2);
-        }
-        break;
-      case '/websites':
-        if (value !== 1) {
-          setValue(1);
-          setSelectedIndex(3);
-        }
-        break;
-      case '/revolution':
-        if (value !== 2) setValue(2);
-        break;
-      case '/about':
-        if (value !== 3) setValue(3);
-        break;
-      case '/contact':
-        if (value !== 4) setValue(4);
-        break;
-      case '/estimate':
-        if (value !== 5) setValue(5);
-        break;
-      default: break;
-    }
-  }, [value]);
+    [...menuOptions, ...routes].forEach((route) => {
+      switch (window.location.pathname) {
+        case `${route.link}`:
+          if (value !== route.activeIndex) {
+            setValue(route.activeIndex);
+            if (route.selectedIndex && route.selectedIndex !== selectedIndex) {
+              setSelectedIndex(route.selectedIndex);
+            }
+          }
+          break;
+        default:
+          break;
+      }
+    });
+  }, [value, menuOptions, routes, selectedIndex]);
 
   const tabs = (
     <>
